@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recon Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+        h2 {
+            margin-top: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Reconnaissance Dashboard</h1>
+
+    <form action="/" method="post">
+        <label for="domain">Domain:</label>
+        <input type="text" id="domain" name="domain" required>
+        <br><br>
+        <label for="target">Target IP:</label>
+        <input type="text" id="target" name="target" required>
+        <br><br>
+        <label for="file_path">File Path for Metadata Extraction:</label>
+        <input type="text" id="file_path" name="file_path" required>
+        <br><br>
+        <input type="submit" value="Run Reconnaissance">
+    </form>
+
+    <h2>Subdomains</h2>
+    <table>
+        <tr><th>Domain</th><th>Subdomain</th></tr>
+        {% for subdomain in subdomains %}
+        <tr><td>{{ subdomain[1] }}</td><td>{{ subdomain[2] }}</td></tr>
+        {% endfor %}
+    </table>
+
+    <h2>Emails</h2>
+    <table>
+        <tr><th>Domain</th><th>Email</th></tr>
+        {% for email in emails %}
+        <tr><td>{{ email[1] }}</td><td>{{ email[2] }}</td></tr>
+        {% endfor %}
+    </table>
+
+    <h2>Open Ports</h2>
+    <table>
+        <tr><th>Domain</th><th>IP</th><th>Port</th><th>Service</th></tr>
+        {% for port in open_ports %}
+        <tr><td>{{ port[1] }}</td><td>{{ port[2] }}</td><td>{{ port[3] }}</td><td>{{ port[4] }}</td></tr>
+        {% endfor %}
+    </table>
+
+    <h2>Services</h2>
+    <table>
+        <tr><th>Domain</th><th>IP</th><th>Port</th><th>Service</th><th>Version</th></tr>
+        {% for service in services %}
+        <tr><td>{{ service[1] }}</td><td>{{ service[2] }}</td><td>{{ service[3] }}</td><td>{{ service[4] }}</td><td>{{ service[5] }}</td></tr>
+        {% endfor %}
+    </table>
+
+    <h2>Shodan Information</h2>
+    <table>
+        <tr><th>IP</th><th>Information</th></tr>
+        {% for info in shodan_info %}
+        <tr><td>{{ info[1] }}</td><td>{{ info[2] }}</td></tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
